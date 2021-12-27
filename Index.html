@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <script>
+      function render(data) {
+        console.log("Creating a new Grid")
+        window.myData = data
+        var table = JSON.parse(data)
+        console.log(table.data)
+        new gridjs.Grid({
+          columns: ["Sender", "Count"],
+          data: table.data,
+          sort: true
+        }).render(document.getElementById("app"));
+      }
+      
+      google.script.run.withSuccessHandler(render)
+          .getInboxStats();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
